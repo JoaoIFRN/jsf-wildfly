@@ -20,14 +20,24 @@ import javax.inject.Named;
 @RequestScoped
 public class ListaLivroBean {
     @Inject
-    private LivroDAO livroDAO;
+    private LivroDAO livroDAO;    
+    private List<Livro> livros;
     
     public List<Livro> listar(){
-        return livroDAO.listar();
+        if (livros == null){
+            livros = livroDAO.listar();
+        }
+        return livros;
     }
     
     public String novo(){
         return "livros.xhtml?faces-redirect=true";
     }
+    
+    public void excluir(Livro livro){
+        livroDAO.excluir(livro);
+        livros = null;
+    }
+   
     
 }

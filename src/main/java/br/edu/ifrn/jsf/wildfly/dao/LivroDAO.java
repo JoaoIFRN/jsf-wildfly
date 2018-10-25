@@ -28,4 +28,13 @@ public class LivroDAO {
         String jpql = "select distinct(l) from Livro l join fetch l.autores";
         return entityManager.createQuery(jpql, Livro.class).getResultList();
     }
+    
+    @Transactional
+    public void excluir(Livro livro){
+        entityManager.remove(buscar(livro.getId()));
+    }
+    
+    public Livro buscar(Integer id){
+        return entityManager.find(Livro.class, id);
+    }
 }

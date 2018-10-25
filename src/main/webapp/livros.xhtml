@@ -8,13 +8,15 @@
         <title>Livros</title>
     </h:head>
     <h:body>
-        <h:form id="form-livros">
-            <h:panelGrid columns="2">
-                <p:outputLabel value="Nome" for="nome"/>
-                <p:inputText value="#{livroBean.livro.nome}" id="nome"/>
-                <p:outputLabel value="Descrição" for="descricao"/>
-                <p:inputText value="#{livroBean.livro.descricao}" id="descricao"/>                
-            </h:panelGrid> 
+        <h:form id="form-livros">             
+            
+            <p:outputLabel value="Nome" for="nome"/>
+            <p:inputText value="#{livroBean.livro.nome}" id="nome"/><br/>
+            <p:message for="nome"/>
+            <p:outputLabel value="Descrição" for="descricao"/>
+            <p:inputText value="#{livroBean.livro.descricao}" id="descricao"/><br/>                
+            <p:message for="descricao"/>
+
             <p:selectManyMenu value="#{livroBean.autoresId}">
                 <f:selectItems value="#{livroBean.listarAutores()}" var="autor" 
                                itemLabel="#{autor.nome}" itemValue="#{autor.id}"/>

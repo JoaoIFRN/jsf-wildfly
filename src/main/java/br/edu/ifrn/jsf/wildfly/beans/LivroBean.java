@@ -12,6 +12,8 @@ import br.edu.ifrn.jsf.wildfly.model.Livro;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -29,6 +31,8 @@ public class LivroBean {
     private AutorDAO autorDAO;
     @Inject
     private Livro  livro;
+    @Inject
+    private FacesContext facesContext;
     
     private List<Integer> autoresId = new ArrayList();
     
@@ -39,6 +43,12 @@ public class LivroBean {
         livroDAO.salvar(livro);
         livro = new Livro();
         autoresId = new ArrayList();
+        
+        
+        
+        //Habilita o escopo de flash
+        facesContext.getExternalContext().getFlash().setKeepMessages(true);
+        facesContext.addMessage(null, new FacesMessage("Livro salvo com sucesso."));
         return "lista-livros.xhtml?faces-redirect=true";
     }
 

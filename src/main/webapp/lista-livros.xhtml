@@ -6,10 +6,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Lista livros</title>
+        <h:outputStylesheet library="css" name="estilo.css"/>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />        
     </h:head>
-    <h:body>
+    <h:body>        
         <h1><p:outputLabel value="Lista de livros"/></h1>
-        <p:dataTable var="livro" value="#{listaLivroBean.listar()}">
+        <p:messages/>
+        <p:dataTable var="livro" value="#{listaLivroBean.listar()}" id="tabela">
             <p:column headerText="Id">
                 <h:outputText value="#{livro.id}" />
             </p:column>
@@ -20,6 +23,11 @@
                 <ui:repeat value="#{livro.autores}" var="autor">
                     <p:outputLabel value="#{autor.nome}"/>
                 </ui:repeat>
+            </p:column>
+            <p:column headerText="Ações">
+                <h:form>
+                    <p:commandLink value="Excluir" action="#{listaLivroBean.excluir(livro)}" update="tabela"/>
+                </h:form>              
             </p:column>
         </p:dataTable>
         
