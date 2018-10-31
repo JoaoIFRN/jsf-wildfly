@@ -9,7 +9,6 @@ import br.edu.ifrn.jsf.wildfly.dao.AutorDAO;
 import br.edu.ifrn.jsf.wildfly.dao.LivroDAO;
 import br.edu.ifrn.jsf.wildfly.model.Autor;
 import br.edu.ifrn.jsf.wildfly.model.Livro;
-import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -32,21 +31,18 @@ public class LivroBean {
     @Inject
     private Livro  livro;
     @Inject
-    private FacesContext facesContext;
+    private FacesContext facesContext;    
+
+    private List<Autor> autores;
+
     
-    private List<Integer> autoresId = new ArrayList();
-    
-    public String salvar(){
-        for (Integer idAutor : autoresId){
-            livro.getAutores().add(new Autor(idAutor));
-        }
-        livroDAO.salvar(livro);
-        livro = new Livro();
-        autoresId = new ArrayList();
+    public String salvar(){                
+        if (livro.getId() != null)
+            livroDAO.atualizar(livro);
+        else
+            livroDAO.salvar(livro);
         
-        
-        
-        //Habilita o escopo de flash
+        livro = new Livro();        
         facesContext.getExternalContext().getFlash().setKeepMessages(true);
         facesContext.addMessage(null, new FacesMessage("Livro salvo com sucesso."));
         return "lista-livros.xhtml?faces-redirect=true";
@@ -61,16 +57,14 @@ public class LivroBean {
     }
     
     public List<Autor> listarAutores(){
-        return autorDAO.listar();
-    }
-
-    public List<Integer> getAutoresId() {
-        return autoresId;
-    }
-
-    public void setAutoresId(List<Integer> autoresId) {
-        this.autoresId = autoresId;
+        if (autores == null)
+            autores = autorDAO.listar();
+        return autores;
     }
     
+    public String editar(Livro livro){
+        this.livro = livro;
+        return "livros.xhtml";
+    }
     
 }

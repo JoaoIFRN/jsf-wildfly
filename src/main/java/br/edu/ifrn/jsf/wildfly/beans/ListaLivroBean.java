@@ -38,6 +38,10 @@ public class ListaLivroBean {
         livroDAO.excluir(livro);
         livros = null;
     }
+    
+    public String atualizar(Integer id){
+        return "livros.xhtml?id=" + String.valueOf(id);
+    }
    
     
 }

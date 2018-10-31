@@ -28,6 +28,9 @@
                 <h:form>
                     <p:commandLink value="Excluir" action="#{listaLivroBean.excluir(livro)}" update="tabela"/>
                 </h:form>              
+                <h:form>
+                    <p:commandLink value="Editar" action="#{livroBean.editar(livro)}"/>
+                </h:form>  
             </p:column>
         </p:dataTable>
         

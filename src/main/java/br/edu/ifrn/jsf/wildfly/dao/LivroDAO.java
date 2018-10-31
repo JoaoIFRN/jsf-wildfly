@@ -24,6 +24,11 @@ public class LivroDAO {
         entityManager.persist(livro);
     }
     
+    @Transactional
+    public void atualizar(Livro livro){
+        entityManager.merge(livro);
+    }
+    
     public List<Livro> listar(){
         String jpql = "select distinct(l) from Livro l join fetch l.autores";
         return entityManager.createQuery(jpql, Livro.class).getResultList();
