@@ -10,33 +10,35 @@
         <h:outputStylesheet library="css" name="bootstrap.min.css" />        
     </h:head>
     <h:body>        
-        <h1><p:outputLabel value="Lista de livros"/></h1>
-        <p:messages/>
-        <p:dataTable var="livro" value="#{listaLivroBean.listar()}" id="tabela">
-            <p:column headerText="Id">
-                <h:outputText value="#{livro.id}" />
-            </p:column>
-            <p:column headerText="Nome">
-                <h:outputText value="#{livro.nome}" />
-            </p:column>
-            <p:column headerText="Autores">
-                <ui:repeat value="#{livro.autores}" var="autor">
-                    <p:outputLabel value="#{autor.nome}"/>
-                </ui:repeat>
-            </p:column>
-            <p:column headerText="Ações">
-                <h:form>
-                    <p:commandLink value="Excluir" action="#{listaLivroBean.excluir(livro)}" update="tabela"/>
-                </h:form>              
-                <h:form>
-                    <p:commandLink value="Editar" action="#{livroBean.editar(livro)}"/>
-                </h:form>  
-            </p:column>
-        </p:dataTable>
-        
-        <h:form>
-            <h:commandButton value="Novo" action="#{listaLivroBean.novo()}"/>
-        </h:form>
+        <div class="container">
+            <h1><p:outputLabel value="Lista de livros"/></h1>
+            <p:messages/>
+            <p:dataTable var="livro" value="#{listaLivroBean.listar()}" id="tabela">
+                <p:column headerText="Id">
+                    <h:outputText value="#{livro.id}" />
+                </p:column>
+                <p:column headerText="Nome">
+                    <h:outputText value="#{livro.nome}" />
+                </p:column>
+                <p:column headerText="Autores">
+                    <ui:repeat value="#{livro.autores}" var="autor">
+                        <p:outputLabel value="#{autor.nome}"/>
+                    </ui:repeat>
+                </p:column>
+                <p:column headerText="Ações">
+                    <h:form>
+                        <p:commandLink value="Excluir" action="#{listaLivroBean.excluir(livro)}" update="tabela"/>
+                    </h:form>              
+                    <h:form>
+                        <p:commandLink value="Editar" action="#{livroBean.editar(livro)}"/>
+                    </h:form>  
+                </p:column>
+            </p:dataTable>
+            <br/>
+            <h:form>
+                <p:commandButton value="Novo livro" action="#{listaLivroBean.novo()}"/>
+            </h:form>
+        </div>
     </h:body>
 </html>
 

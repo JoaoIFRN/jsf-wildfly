@@ -36,15 +36,19 @@ public class LivroBean {
     private List<Autor> autores;
 
     
-    public String salvar(){                
-        if (livro.getId() != null)
+    public String salvar(){           
+        String mensagem = "";
+        if (livro.getId() != null){
             livroDAO.atualizar(livro);
-        else
+            mensagem = "Livro atualizado com sucesso";
+        }else{
             livroDAO.salvar(livro);
+            mensagem = "Livro salvo com sucesso";
+        }
         
         livro = new Livro();        
         facesContext.getExternalContext().getFlash().setKeepMessages(true);
-        facesContext.addMessage(null, new FacesMessage("Livro salvo com sucesso."));
+        facesContext.addMessage(null, new FacesMessage(mensagem));
         return "lista-livros.xhtml?faces-redirect=true";
     }
 

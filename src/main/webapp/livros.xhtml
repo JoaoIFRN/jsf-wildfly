@@ -6,37 +6,41 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Livros</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />        
     </h:head>
     <h:body>
-        <h:form id="form-livros"> 
-            <h:inputHidden value="#{livroBean.livro.id}"/> 
-            <div>
-                <p:outputLabel value="Nome" for="nome"/>
-                <p:inputText value="#{livroBean.livro.nome}" id="nome"/><br/>
-                <p:message for="nome"/>
-            </div>
-            <div>
-                <p:outputLabel value="Descrição" for="descricao"/>
-                <p:inputText value="#{livroBean.livro.descricao}" id="descricao"/><br/>                
-                <p:message for="descricao"/>
-            </div>
-            <div>
-                <p:outputLabel value="Data de publicação" for="dataPublicacao"/>
-                <p:inputMask mask="99/99/9999" value="#{livroBean.livro.dataPublicacao.time}" id="dataPublicacao" rendered="true" requiredMessage="Campo requerido" converterMessage="Erro na conversão">
-                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife"/>
-                </p:inputMask>
-            </div>
-            <div>
-                <p:outputLabel value="Autores" for="autores"/>
-                <p:selectManyMenu value="#{livroBean.livro.autores}" converter="conversorAutor" id="autores">
-                    <f:selectItems value="#{livroBean.listarAutores()}" var="autor" 
-                                   itemLabel="#{autor.nome}" itemValue="#{autor}"/>
-                </p:selectManyMenu>
-                <p:message for="autores"/>
-            </div>
-            <p:commandButton value="Cadastrar" action="#{livroBean.salvar()}" 
-                             update="form-livros"/>
-        </h:form>
+        <div class="container">
+            <h1 style="text-align: center;">Livros</h1>
+            <h:form id="form-livros" style="form-horizontal"> 
+                <h:inputHidden value="#{livroBean.livro.id}"/> 
+                <div class="form-group">
+                    <h:outputLabel value="Nome" for="nome"/><br/>
+                    <h:inputText value="#{livroBean.livro.nome}" id="nome" styleClass="form-control"/><br/>
+                    <p:message for="nome"/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Descrição" for="descricao"/><br/>
+                    <h:inputText value="#{livroBean.livro.descricao}" id="descricao" styleClass="form-control"/><br/>                
+                    <p:message for="descricao"/>
+                </div>
+                <div class="form-group">
+                    <p:outputLabel value="Data de publicação" for="dataPublicacao"/><br/>        
+                    <p:inputMask mask="99/99/9999" value="#{livroBean.livro.dataPublicacao.time}" id="dataPublicacao" rendered="true" requiredMessage="Campo requerido" converterMessage="Erro na conversão"  styleClass="form-control">
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife"/>
+                    </p:inputMask>
+                </div>
+                <div class="form-group">
+                    <p:outputLabel value="Autores" for="autores"/><br/>
+                    <p:selectManyMenu value="#{livroBean.livro.autores}" converter="conversorAutor" id="autores">
+                        <f:selectItems value="#{livroBean.listarAutores()}" var="autor" 
+                                       itemLabel="#{autor.nome}" itemValue="#{autor}"/>
+                    </p:selectManyMenu>
+                    <h:message for="autores"/>
+                </div>
+                <p:commandButton value="Cadastrar" action="#{livroBean.salvar()}" 
+                                 update="form-livros"/>
+            </h:form>
+        </div>
     </h:body>
 </html>
 
