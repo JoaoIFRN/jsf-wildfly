@@ -19,7 +19,8 @@ import javax.faces.convert.FacesConverter;
 public class ConversorAutor implements Converter{
 
     @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+    public Object getAsObject(FacesContext context, 
+            UIComponent component, String value) {
         if (value == null || value.isEmpty())
             return null;
         Autor autor = new Autor();
@@ -28,7 +29,8 @@ public class ConversorAutor implements Converter{
     }
 
     @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) {
+    public String getAsString(FacesContext context, 
+            UIComponent component, Object value) {
         if (value == null)
             return null;
         Autor autor = (Autor) value;

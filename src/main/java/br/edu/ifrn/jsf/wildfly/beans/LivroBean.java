@@ -9,12 +9,16 @@ import br.edu.ifrn.jsf.wildfly.dao.AutorDAO;
 import br.edu.ifrn.jsf.wildfly.dao.LivroDAO;
 import br.edu.ifrn.jsf.wildfly.model.Autor;
 import br.edu.ifrn.jsf.wildfly.model.Livro;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -31,8 +35,9 @@ public class LivroBean {
     @Inject
     private Livro  livro;
     @Inject
-    private FacesContext facesContext;    
-
+    private FacesContext facesContext;     
+    private Part capaLivro;
+    private Integer id;
     private List<Autor> autores;
 
     
@@ -45,6 +50,14 @@ public class LivroBean {
             livroDAO.salvar(livro);
             mensagem = "Livro salvo com sucesso";
         }
+        
+        String path = "/livros/" + capaLivro.getSubmittedFileName();
+        try {
+            capaLivro.write(path);
+        } catch (IOException ex) {
+            Logger.getLogger(LivroBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(path);
         
         livro = new Livro();        
         facesContext.getExternalContext().getFlash().setKeepMessages(true);
@@ -66,9 +79,32 @@ public class LivroBean {
         return autores;
     }
     
-    public String editar(Livro livro){
-        this.livro = livro;
-        return "livros.xhtml";
+    public void carregarLivro(){
+        if (id != null){
+            Livro livro = livroDAO.buscar(id);
+            if (livro != null){
+                this.livro = livro;
+                return;
+            }
+        }             
+    }
+
+    public Part getCapaLivro() {
+        return capaLivro;
+    }
+
+    public void setCapaLivro(Part capaLivro) {
+        this.capaLivro = capaLivro;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
     
+    
+
 }
