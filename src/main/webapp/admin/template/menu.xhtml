@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Sistema de livros</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <h:link  styleClass="nav-link" value="Formulário" outcome="livros"/>
+                </li>
+                <li class="nav-item active">
+                    <h:link  styleClass="nav-link" value="Listagem" outcome="lista-livros"/>
+                </li>
+                <li class="nav-item active">
+                    <h:link  styleClass="nav-link" value="Autores" outcome="autores"/>
+                </li>
+                <li class="nav-item active">
+                    <span class="nav-link">Bem vindo, #{request.getUserPrincipal().getName()}</span>
+                </li>
+                <li class="nav-item active">
+                    <h:form>
+                        <h:commandLink  styleClass="nav-link" value="Logout" action="#{request.logout()}"/>
+                    </h:form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</ui:composition>
+

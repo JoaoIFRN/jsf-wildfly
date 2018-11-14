@@ -39,7 +39,7 @@ public class LivroDAO {
         entityManager.remove(buscar(livro.getId()));
     }
     
-    public Livro buscar(Integer id){
+    public Livro buscar(Integer id){        
         String jpql = "select distinct(l) from Livro l join fetch l.autores where l.id = :id";       
         return entityManager.createQuery(jpql,Livro.class).setParameter("id", id).getSingleResult();
     }

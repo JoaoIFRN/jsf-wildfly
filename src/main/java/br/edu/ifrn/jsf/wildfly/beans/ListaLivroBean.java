@@ -8,16 +8,14 @@ package br.edu.ifrn.jsf.wildfly.beans;
 import br.edu.ifrn.jsf.wildfly.dao.LivroDAO;
 import br.edu.ifrn.jsf.wildfly.model.Livro;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  *
  * @author joaon
  */
-@Named
-@RequestScoped
+@Model
 public class ListaLivroBean {
     @Inject
     private LivroDAO livroDAO;    

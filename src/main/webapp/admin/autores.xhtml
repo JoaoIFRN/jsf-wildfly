@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"      
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="template/principal.xhtml">
+
+    <ui:define name="titulo">Autores</ui:define>
+
+    <ui:define name="corpo">
+        
+        <p:messages/>
+        
+        <h:form id="form-livros" style="form-horizontal"> 
+            <h:inputHidden value="#{autorBean.autor.id}"/> 
+            <div class="form-group">
+                <h:outputLabel value="Nome" for="nome"/><br/>
+                <h:inputText value="#{autorBean.autor.nome}" id="nome" styleClass="form-control"/>
+                <h:message for="nome" style="color: red;"/>
+            </div>
+            <h:commandButton value="Cadastrar" action="#{autorBean.salvar()}" styleClass="btn btn-secondary"/>
+        </h:form>
+
+        <br/>
+        
+        <p:dataTable var="autor" value="#{autorBean.listar()}" id="tabela">
+            <p:column headerText="Id">
+                <h:outputText value="#{autor.id}" />
+            </p:column>
+            <p:column headerText="Nome">
+                <h:outputText value="#{autor.nome}" />
+            </p:column>            
+            <p:column headerText="Ações">
+                <h:form>
+                    <p:commandLink value="Excluir" action="#{autorBean.excluir(autor)}" update="tabela"/>
+                </h:form>                                                  
+                <h:form>
+                    <p:commandLink value="Editar" action="#{autorBean.editar(autor)}" update="form-livros"/>
+                </h:form>                                                  
+            </p:column>
+        </p:dataTable>
+
+    </ui:define>
+
+</ui:composition>
+
