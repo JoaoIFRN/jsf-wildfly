@@ -37,10 +37,19 @@ public class LivroBean {
     private Part capaLivro;
     private Integer id;
     private List<Autor> autores;
-
     
     public String salvar(){           
-        String mensagem = "";
+        String path = "/livros/" + capaLivro.getSubmittedFileName();
+        try {
+            capaLivro.write(path);
+        } catch (IOException ex) {
+            Logger.getLogger(LivroBean.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        System.out.println(path);
+        
+        livro.setPathCapaLivro(path);
+        
+        String mensagem;
         if (livro.getId() != null){
             livroDAO.atualizar(livro);
             mensagem = "Livro atualizado com sucesso";
@@ -48,15 +57,7 @@ public class LivroBean {
             livroDAO.salvar(livro);
             mensagem = "Livro salvo com sucesso";
         }
-        
-        String path = "/livros/" + capaLivro.getSubmittedFileName();
-        try {
-            capaLivro.write(path);
-        } catch (IOException ex) {
-            Logger.getLogger(LivroBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println(path);
-        
+                
         livro = new Livro();        
         facesContext.getExternalContext().getFlash().setKeepMessages(true);
         facesContext.addMessage(null, new FacesMessage(mensagem));
@@ -102,7 +103,5 @@ public class LivroBean {
     public void setId(Integer id) {
         this.id = id;
     }
-    
-    
 
 }

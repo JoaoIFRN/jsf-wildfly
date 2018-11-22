@@ -1,28 +1,45 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<!DOCTYPE html>
+<html lang="en" class="no-js"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"> 
     <h:head>
-        <title>Login</title>        
-        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <meta charset="UTF-8" />
+        <title>Login - Sistema de livros</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+        <h:outputStylesheet library="css" name="demo.css" /> 
+        <h:outputStylesheet library="css" name="style.css" /> 
+        <h:outputStylesheet library="css" name="animate-custom.css" /> 
     </h:head>
     <h:body>
         <div class="container">
-            <div class="jumbotron">
-                <h1>Login</h1>
-            </div>
-            <form action="${request.getContextPath()}/j_security_check" method="post">
-                <div class="form-group">
-                    <label>Login:</label>
-                    <input type="email" name="j_username" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <label>Senha:</label>
-                    <input name="j_password" type="password" class="form-control"/>
-                </div>
-                <button type="submit" class="btn btn-secondary">Login</button>
-            </form>
+            <header>
+                <h1>Sistema de livros <span> IFRN - Parnamirim</span></h1>
+            </header>
+            <section>				
+                <div id="container_demo" >                    
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper">
+                        <div id="login" class="animate form">
+                            <form  action="${request.getContextPath()}/j_security_check" method="post" jsf:id="form"> 
+                                <h1>Log in</h1> 
+                                <p> 
+                                    <label for="username" class="uname" data-icon="u" > Seu e-mail </label>
+                                    <input id="username" jsf:id="username" jsf:value="#{loginBean.email}" name="j_username" required="required" type="text" placeholder="e-mail"/>
+                                </p>
+                                <p> 
+                                    <label for="password" class="youpasswd" data-icon="p"> Sua senha </label>
+                                    <input id="password" jsf:id="password" jsf:value="#{loginBean.senha}" name="j_password" required="required" type="password" placeholder="senha" /> 
+                                </p>
+                                <p class="login button"> 
+                                    <input type="submit" value="Login" jsf:action="#{loginBean.efetuarLogin()}"/> 
+				</p>
+                            </form>
+                        </div>                      						
+                    </div>
+                </div>  
+            </section>
         </div>
     </h:body>
 </html>
-

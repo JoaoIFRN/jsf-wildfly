@@ -42,6 +42,7 @@ public class Livro implements Serializable{
     private Calendar dataPublicacao = Calendar.getInstance();
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Autor> autores = new ArrayList();
+    private String pathCapaLivro;    
     
     public Livro(){        
     }
@@ -89,6 +90,14 @@ public class Livro implements Serializable{
     public void setDataPublicacao(Calendar dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
+
+    public String getPathCapaLivro() {
+        return pathCapaLivro;
+    }
+
+    public void setPathCapaLivro(String pathCapaLivro) {
+        this.pathCapaLivro = pathCapaLivro;
+    }  
 
     @Override
     public int hashCode() {

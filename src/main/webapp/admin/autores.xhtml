@@ -2,7 +2,8 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"      
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="template/principal.xhtml">
+                template="template/principal.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="titulo">Autores</ui:define>
 
@@ -22,22 +23,25 @@
 
         <br/>
         
-        <p:dataTable var="autor" value="#{autorBean.listar()}" id="tabela">
-            <p:column headerText="Id">
+        <h:dataTable var="autor" value="#{autorBean.listar()}" id="tabela">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
                 <h:outputText value="#{autor.id}" />
-            </p:column>
-            <p:column headerText="Nome">
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
                 <h:outputText value="#{autor.nome}" />
-            </p:column>            
-            <p:column headerText="Ações">
+            </h:column>            
+            <h:column>
+                <f:facet name="header">Ações</f:facet>
                 <h:form>
-                    <p:commandLink value="Excluir" action="#{autorBean.excluir(autor)}" update="tabela"/>
+                    <h:commandLink value="Excluir" action="#{autorBean.excluir(autor)}"/>
                 </h:form>                                                  
                 <h:form>
-                    <p:commandLink value="Editar" action="#{autorBean.editar(autor)}" update="form-livros"/>
+                    <h:commandLink value="Editar" action="#{autorBean.editar(autor)}"/>
                 </h:form>                                                  
-            </p:column>
-        </p:dataTable>
+            </h:column>
+        </h:dataTable>
 
     </ui:define>
 

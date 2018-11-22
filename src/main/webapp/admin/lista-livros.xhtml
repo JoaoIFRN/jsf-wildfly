@@ -3,6 +3,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
                 template="template/principal.xhtml">
 
     <ui:define name="titulo">Lista de livros</ui:define>
@@ -10,29 +11,38 @@
     <ui:define name="corpo">   
         <h1><p:outputLabel value="Lista de livros"/></h1>
         <p:messages/>
-        <p:dataTable var="livro" value="#{listaLivroBean.listar()}" id="tabela">
-            <p:column headerText="Id">
+        <h:dataTable var="livro" value="#{listaLivroBean.listar()}" id="tabela">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
                 <h:outputText value="#{livro.id}" />
-            </p:column>
-            <p:column headerText="Nome">
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
                 <h:outputText value="#{livro.nome}" />
-            </p:column>
-            <p:column headerText="Autores">
+            </h:column>            
+            <h:column>
+                <f:facet name="header">Autores</f:facet>
                 <ui:repeat value="#{livro.autores}" var="autor">
-                    <p:outputLabel value="#{autor.nome}"/>
+                    <h:outputLabel value="#{autor.nome}"/>
                 </ui:repeat>
-            </p:column>
-            <p:column headerText="Ações">
+            </h:column>
+            <h:column>
+                <f:facet name="header">Capa</f:facet>
+                <img src="#{request.contextPath}/file#{livro.pathCapaLivro}"
+                     height="60px" width="60px" alt="#{livro.nome}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ações</f:facet>
                 <h:form>
-                    <p:commandLink value="Excluir" action="#{listaLivroBean.excluir(livro)}" update="tabela"/>
+                    <h:commandLink value="Excluir" action="#{listaLivroBean.excluir(livro)}"/>
                 </h:form>                                  
                 <a href="#{request.contextPath}/admin/livros.xhtml?id=#{livro.id}">Editar</a>     
                 <a href="#{request.contextPath}/admin/livro-detalhe.xhtml?id=#{livro.id}">Detalhes</a>     
-            </p:column>
-        </p:dataTable>
+            </h:column>
+        </h:dataTable>
         <br/>
         <h:form>
-            <p:commandButton value="Novo livro" action="#{listaLivroBean.novo()}"/>
+            <h:commandButton value="Novo livro" action="#{listaLivroBean.novo()}"/>
         </h:form>
     </ui:define>
 </ui:composition>
